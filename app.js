@@ -8,7 +8,11 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
-
+const cors         = require('cors');
+const passport     = require('passport')
+const LocalStrategy = require('passport-local').Strategy;
+const session       = require('express-session');
+const bcrypt        = require('bcryptjs')
 
 mongoose
   .connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPSSWD}@cluster0.bwfiq.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -68,13 +72,13 @@ passport.serializeUser((user, callback) => {
 
 //Middleware para des-serializar al usuario
 passport.deserializeUser((id, callback) => {
-	User.findById(id).then((user) => callback(null, user)).catch((err) => callback(err));
+	Parent.findById(id).then((user) => callback(null, user)).catch((err) => callback(err));
 });
 
 //Middleware del Strategy
 passport.use(
 	new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
-		User.findOne({ username })
+		Parent.findOne({ username })
 			.then((user) => {
 				if (!user) {
 					return next(null, false, { message: 'Incorrect username' });
@@ -104,6 +108,7 @@ const index = require('./routes/index');
 app.use('/', index);
 
 const authRoutes = require('./routes/auth-routes');
+const Parent = require('./models/Parent');
 app.use('/', authRoutes);
 
 
