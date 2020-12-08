@@ -3,10 +3,9 @@ const express = require('express');
 const authRoutes = express.Router();
 const passport = require('passport')
 const bcrypt = require('bcryptjs')
-// import passport from 'passport';
-// import bcrypt from 'bcryptjs';
 
-const Parent = require('../models/Parent')
+const Parent = require('../models/Parent');
+const Child = require('../models/Child');
 
 authRoutes.post('/signup', (req, res, next) => {
 	const username = req.body.username;
@@ -64,9 +63,6 @@ authRoutes.post('/signup', (req, res, next) => {
 	});
 });
 
-// routes/auth-routes.js
-
-
 authRoutes.post('/login', (req, res, next) => {
     passport.authenticate('local', (err, theUser, failureDetails) => {
         if (err) {
@@ -94,7 +90,6 @@ authRoutes.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-
 // authRoutes.post('/login', passport.authenticate("local", {
 //   successRedirect: '/',
 //   failureRedirect: '/login',
@@ -114,7 +109,22 @@ authRoutes.get('/loggedin', (req, res, next) => {
       res.status(200).json(req.user);
       return;
   }
-  res.json({ });
+  res.status(403).json({ message: 'Unauthorized' });
 });
 
+authRoutes.post('/add_child', (req, res, next)=>{
+  Child.create({
+    name: req.body.name,
+    age: req.body.age,
+    owner: req.user._id
+  })
+  .then(response => {
+  res.json(response);
+  })
+  .catch(err => {
+  res.json(err);
+  })
+});
 module.exports = authRoutes;
+
+// Añadir rutas para los profesores, incluyendo caracteristicas de admin
