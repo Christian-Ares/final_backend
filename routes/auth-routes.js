@@ -8,9 +8,12 @@ const Parent = require('../models/Parent');
 const Child = require('../models/Child');
 
 authRoutes.post('/signup', (req, res, next) => {
+	const name = req.body.name;
+	const lastName = req.body.lastName;
+	const address = req.body.address;
 	const username = req.body.username;
 	const password = req.body.password;
-
+	
 	if (!username || !password) {
 		res.status(400).json({ message: 'Provide username and password' });
 		return;
@@ -38,8 +41,11 @@ authRoutes.post('/signup', (req, res, next) => {
 		const hashPass = bcrypt.hashSync(password, salt);
 
 		const addNewParent = new Parent({
+			name: name,
+			lastName: lastName,
+			address: address,
 			username: username,
-      password: hashPass
+			password: hashPass,
 		});
 
 		addNewParent.save((err) => {
