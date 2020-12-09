@@ -125,6 +125,7 @@ authRoutes.post('/add_child', (req, res, next)=>{
   res.json(err);
   })
 });
+
 module.exports = authRoutes;
 
 // Añadir rutas para los profesores, incluyendo caracteristicas de admin
