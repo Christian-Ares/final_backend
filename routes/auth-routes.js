@@ -143,4 +143,25 @@ authRoutes.post('/add_teacher', (req, res, next)=>{
   })
 });
 
+authRoutes.get('/children/:id', (req, res, next)=>{
+	const id = req.params.id;
+	Child.findById(id)
+	.then((result)=>{
+		console.log(result)
+	})
+	.catch((err)=>{
+		console.log(err)
+	})
+})
+
+authRoutes.get('/teacher/:id', (req, res, next)=>{
+	const id = req.params.id;
+	Teacher.findById(id)
+	.then((result)=>{
+		console.log(result)
+	})
+	.catch((err)=>{
+		console.log(err)
+	})
+})
 module.exports = authRoutes;
