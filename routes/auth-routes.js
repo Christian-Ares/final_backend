@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 
 const Parent = require('../models/Parent');
 const Child = require('../models/Child');
+const Teacher = require('../models/Teacher');
 
 authRoutes.post('/signup', (req, res, next) => {
 	const name = req.body.name;
@@ -91,17 +92,10 @@ authRoutes.post('/login', (req, res, next) => {
             }
 
             // We are now logged in (that's why we can also send req.user)
-            res.status(200).json({message: 'Login Correct'});
+            res.status(200).json(theUser);
         });
     })(req, res, next);
 });
-
-// authRoutes.post('/login', passport.authenticate("local", {
-//   successRedirect: '/',
-//   failureRedirect: '/login',
-//   failureFlash: true,
-//   passReqToCallback: true
-// }))
 
 authRoutes.post('/logout', (req, res, next) => {
   // req.logout() is defined by passport
@@ -132,6 +126,21 @@ authRoutes.post('/add_child', (req, res, next)=>{
   })
 });
 
-module.exports = authRoutes;
+authRoutes.post('/add_teacher', (req, res, next)=>{
 
-// Añadir rutas para los profesores, incluyendo caracteristicas de admin
+  Teacher.create({
+    name: req.body.name,
+		age: req.body.age,
+		speciality: req.body.speciality,
+		education: req.body.education,
+		role: req.body.role,
+  })
+  .then(response => {
+  res.json(response);
+  })
+  .catch(err => {
+  res.json(err);
+  })
+});
+
+module.exports = authRoutes;
