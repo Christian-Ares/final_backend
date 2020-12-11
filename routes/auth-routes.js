@@ -164,4 +164,5 @@ authRoutes.get('/teacher/:id', (req, res, next)=>{
 		console.log(err)
 	})
 })
+
 module.exports = authRoutes;
