@@ -7,8 +7,8 @@ const childSchema = new Schema ({
   lastName: {type: String},
   gender: {type: String},
   birth: {type: String},
-  lunch: {type: Boolean, default: false},
-  morning: {type: Boolean, default: false},
+  lunch: {type: Boolean, value: true},
+  morning: {type: Boolean, value: true},
   owner: {type: Schema.Types.ObjectId, ref: 'Parent'}
 })
 
