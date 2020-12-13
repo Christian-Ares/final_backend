@@ -114,9 +114,13 @@ authRoutes.get('/loggedin', (req, res, next) => {
 
 authRoutes.post('/add_child', (req, res, next)=>{
   Child.create({
-    name: req.body.name,
-    age: req.body.age,
-    owner: req.user._id
+		name: req.body.name,
+		lastName: req.body.lastName,
+		gender: req.body.gender,
+		birth: req.body.birth,
+		lunch: req.body.lunch,
+		morning:req.body.morning,
+    owner: req.user.id
   })
   .then(response => {
   res.json(response);

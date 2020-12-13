@@ -4,7 +4,11 @@ const Parent = require('./Parent');
 
 const childSchema = new Schema ({
   name: {type: String},
-  age: {type: String},
+  lastName: {type: String},
+  gender: {type: String},
+  birth: {type: String},
+  lunch: {type: Boolean, default: false},
+  morning: {type: Boolean, default: false},
   owner: {type: Schema.Types.ObjectId, ref: 'Parent'}
 })
 
