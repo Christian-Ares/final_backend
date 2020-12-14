@@ -15,7 +15,7 @@ const session       = require('express-session');
 const bcrypt        = require('bcryptjs')
 
 mongoose
-  .connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPSSWD}@cluster0.bwfiq.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect(`mongodb+srv://${process.env.DBUSER}:${process.env.DBPSSWD}@cluster0.bwfiq.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

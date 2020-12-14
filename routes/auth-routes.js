@@ -169,10 +169,10 @@ authRoutes.get('/teacher/:id', (req, res, next)=>{
 	})
 })
 
-authRoutes.get('/edit_parent/:id', (req, res, next)=>{
-	const user = req.user
+authRoutes.post('/edit_parent/:id', (req, res, next)=>{
 	const id = req.params.id
-	Parent.findById(id)
+	let {address} = req.body
+	Parent.findByIdAndUpdate(id, {address})
 	.then((result)=>{
 		console.log(result)
 	})
@@ -181,8 +181,8 @@ authRoutes.get('/edit_parent/:id', (req, res, next)=>{
 	})
 })
 
-authRoutes.post('/edit_parent/:id', (req, res, next)=>{
+// authRoutes.post('/edit_parent/:id', (req, res, next)=>{
 	
-})
+// })
 
 module.exports = authRoutes;
