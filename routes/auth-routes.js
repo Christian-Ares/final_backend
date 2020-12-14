@@ -169,4 +169,20 @@ authRoutes.get('/teacher/:id', (req, res, next)=>{
 	})
 })
 
+authRoutes.get('/edit_parent/:id', (req, res, next)=>{
+	const user = req.user
+	const id = req.params.id
+	Parent.findById(id)
+	.then((result)=>{
+		console.log(result)
+	})
+	.catch((err)=>{
+		console.log(err)
+	})
+})
+
+authRoutes.post('/edit_parent/:id', (req, res, next)=>{
+	
+})
+
 module.exports = authRoutes;
