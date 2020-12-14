@@ -181,8 +181,4 @@ authRoutes.post('/edit_parent/:id', (req, res, next)=>{
 	})
 })
 
-// authRoutes.post('/edit_parent/:id', (req, res, next)=>{
-	
-// })
-
 module.exports = authRoutes;
