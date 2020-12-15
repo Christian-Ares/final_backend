@@ -171,10 +171,11 @@ authRoutes.get('/teacher/:id', (req, res, next)=>{
 
 authRoutes.post('/edit_parent/:id', (req, res, next)=>{
 	const id = req.params.id
-	let {address} = req.body.address
-	Parent.findByIdAndUpdate(id, {address})
+	const editedParent = req.body
+	Parent.findByIdAndUpdate(id, editedParent)
 	.then((result)=>{
 		console.log(result)
+		res.send(result)
 	})
 	.catch((err)=>{
 		console.log(err)
