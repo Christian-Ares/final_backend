@@ -12,6 +12,7 @@ authRoutes.post('/signup', (req, res, next) => {
 	const name = req.body.name;
 	const lastName = req.body.lastName;
 	const address = req.body.address;
+	const phone = req.body.phone;
 	const username = req.body.username;
 	const password = req.body.password;
 	
@@ -45,6 +46,7 @@ authRoutes.post('/signup', (req, res, next) => {
 			name: name,
 			lastName: lastName,
 			address: address,
+			phone: phone,
 			username: username,
 			password: hashPass,
 		});
@@ -119,7 +121,7 @@ authRoutes.post('/add_child', (req, res, next)=>{
 		gender: req.body.gender,
 		birth: req.body.birth,
 		lunch: req.body.lunch,
-		morning:req.body.morning,
+		morning: req.body.morning,
     owner: req.user.id
   })
   .then(response => {
@@ -172,9 +174,9 @@ authRoutes.get('/teacher/:id', (req, res, next)=>{
 authRoutes.post('/edit_parent/:id', (req, res, next)=>{
 	const id = req.params.id
 	console.log(req.body)
-	Parent.findByIdAndUpdate(id, {address: req.body.address})
+	Parent.findByIdAndUpdate(id, {address: req.body.address, phone: req.body.phone})
 	.then((result)=>{
-		// console.log(result)
+		console.log(result)
 		res.send(result)
 	})
 	.catch((err)=>{
