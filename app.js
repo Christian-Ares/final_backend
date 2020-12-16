@@ -4,7 +4,7 @@ const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express      = require('express');
 const favicon      = require('serve-favicon');
-const hbs          = require('hbs');
+const cookieSession = require('cookie-session')
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
@@ -63,7 +63,25 @@ app.use((req, res, next)=>{
 })
 
 // Middleware de Session
-app.use(session({ secret: 'ourPassword', resave: true, saveUninitialized: true }));
+app.set('trust proxy', 1)
+
+app.use(cookieSession({
+    name:'session',
+    keys: ['key1', 'key2'],
+    sameSite: 'none',
+    secure: true
+}))
+
+
+app.use(session ({ 
+  secret: 'ourPassword',
+  resave: true,
+  saveUninitialized: true,
+  cookie: {
+    sameSite: 'none',
+    secure: true
+  }
+ }));
 
 //Middleware para serializar al usuario
 passport.serializeUser((user, callback) => {
