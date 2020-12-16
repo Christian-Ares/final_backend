@@ -171,10 +171,23 @@ authRoutes.get('/teacher/:id', (req, res, next)=>{
 	})
 })
 
-authRoutes.post('/edit_parent/:id', (req, res, next)=>{
+authRoutes.post('/edit_address/:id', (req, res, next)=>{
 	const id = req.params.id
 	console.log(req.body)
-	Parent.findByIdAndUpdate(id, {address: req.body.address, phone: req.body.phone})
+	Parent.findByIdAndUpdate(id, {address: req.body.address})
+	.then((result)=>{
+		console.log(result)
+		res.send(result)
+	})
+	.catch((err)=>{
+		console.log(err)
+	})
+})
+
+authRoutes.post('/edit_phone/:id', (req, res, next)=>{
+	const id = req.params.id
+	console.log(req.body)
+	Parent.findByIdAndUpdate(id,  {phone: req.body.phone})
 	.then((result)=>{
 		console.log(result)
 		res.send(result)
