@@ -21,7 +21,7 @@ authRoutes.post('/signup', (req, res, next) => {
 		return;
 	}
 
-	if (password.length < 9) {
+	if (password.length < 4) {
 		res
 			.status(400)
 			.json({ message: 'Please make your password at least 9 characters long for security purposes.' });
@@ -108,7 +108,7 @@ authRoutes.post('/logout', (req, res, next) => {
 authRoutes.get('/loggedin', (req, res, next) => {
   // req.isAuthenticated() is defined by passport
   if (req.isAuthenticated()) {
-      res.status(200).json(req.user);
+			res.status(200).json(req.user);
       return;
   }
   res.status(403).json({ message: 'Unauthorized' });
@@ -122,7 +122,7 @@ authRoutes.post('/add_child', (req, res, next)=>{
 		birth: req.body.birth,
 		lunch: req.body.lunch,
 		morning: req.body.morning,
-    owner: req.user.id
+    owner: req.body.userId
   })
   .then(response => {
   res.json(response);
