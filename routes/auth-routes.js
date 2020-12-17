@@ -151,12 +151,13 @@ authRoutes.post('/add_teacher', (req, res, next)=>{
 
 authRoutes.get('/children/:id', (req, res, next)=>{
 	const id = req.params.id;
-	Child.findById(id)
+	Child.find({owner:id})
 	.then((result)=>{
-		console.log(result)
+		res.send(result)
+
 	})
 	.catch((err)=>{
-		console.log(err)
+		res.send(err)
 	})
 })
 
