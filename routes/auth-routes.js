@@ -21,7 +21,7 @@ authRoutes.post('/signup', (req, res, next) => {
 		return;
 	}
 
-	if (password.length < 4) {
+	if (password.length < 12) {
 		res
 			.status(400)
 			.json({ message: 'Please make your password at least 9 characters long for security purposes.' });
