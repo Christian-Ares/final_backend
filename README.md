@@ -1,4 +1,4 @@
-# final_backend
+# Mi Primer Paso (Backend)
 
 Backend side of the final project in Ironhack, to see the front side click here please --> https://github.com/Christian-Ares/final_react
 
